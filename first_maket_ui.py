@@ -15,7 +15,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QListView,
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
     QPushButton, QSizePolicy, QTableView, QWidget)
 
 class Ui_Form(object):
@@ -61,10 +61,13 @@ class Ui_Form(object):
 
         self.employesTable = QTableView(Form)
         self.employesTable.setObjectName(u"employesTable")
-        self.employesTable.setGeometry(QRect(0, 120, 711, 521))
-        self.recordsList = QListView(Form)
-        self.recordsList.setObjectName(u"recordsList")
-        self.recordsList.setGeometry(QRect(720, 120, 271, 521))
+        self.employesTable.setGeometry(QRect(0, 120, 1001, 321))
+        self.employesTable.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.employesTable.setSortingEnabled(True)
+        self.repotsTable = QTableView(Form)
+        self.repotsTable.setObjectName(u"repotsTable")
+        self.repotsTable.setGeometry(QRect(0, 450, 1001, 192))
+        self.repotsTable.setSelectionBehavior(QAbstractItemView.SelectRows)
 
         self.retranslateUi(Form)
         self.addEmployeeButton.pressed.connect(Form.addEmployeePressed)
