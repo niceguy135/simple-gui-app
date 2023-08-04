@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QMainWindow, QApplication
 from PySide6.QtCore import QAbstractTableModel, Qt, QModelIndex
 
 from first_maket_ui import Ui_Form
-from models import EmployeeInterface, Employee
+from employeModels import EmployeeInterface, Employee
 
 
 class ProgramWindow(QMainWindow):
