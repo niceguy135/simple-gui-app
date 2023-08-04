@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
-    QPushButton, QSizePolicy, QTableView, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QHBoxLayout,
+    QHeaderView, QPushButton, QSizePolicy, QTableView,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -66,8 +67,13 @@ class Ui_Form(object):
         self.employesTable.setSortingEnabled(True)
         self.repotsTable = QTableView(Form)
         self.repotsTable.setObjectName(u"repotsTable")
-        self.repotsTable.setGeometry(QRect(0, 450, 1001, 192))
+        self.repotsTable.setGeometry(QRect(0, 450, 1000, 192))
+        sizePolicy.setHeightForWidth(self.repotsTable.sizePolicy().hasHeightForWidth())
+        self.repotsTable.setSizePolicy(sizePolicy)
+        self.repotsTable.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
         self.repotsTable.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.repotsTable.setSortingEnabled(True)
+        self.repotsTable.horizontalHeader().setMinimumSectionSize(100)
 
         self.retranslateUi(Form)
         self.addEmployeeButton.pressed.connect(Form.addEmployeePressed)

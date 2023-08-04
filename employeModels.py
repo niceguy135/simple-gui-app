@@ -1,4 +1,4 @@
-from PySide6.QtCore import QAbstractTableModel, Qt, QModelIndex
+from PySide6.QtCore import QAbstractTableModel, Qt
 
 class EmployeeInterface(QAbstractTableModel):
     def __init__(self, data):
