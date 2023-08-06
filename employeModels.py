@@ -58,7 +58,7 @@ class EmployeeInterface(QAbstractTableModel):
         return None
 
 
-class Employee():
+class EmployeeView():
     __dictionary = dict(name="Unknow",
                  room=0,
                  percent=0,

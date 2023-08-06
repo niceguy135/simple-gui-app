@@ -46,7 +46,7 @@ class ReportInterface(QAbstractTableModel):
         return None
 
 
-class ReportForEmployee():
+class ReportView():
     __dictionary = dict(name="Unknow report",
                  totalSumReport=0,
                  percent=0)

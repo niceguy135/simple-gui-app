@@ -5,8 +5,8 @@ from random import randint
 from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView
 
 from first_maket_ui import Ui_Form
-from employeModels import EmployeeInterface, Employee
-from reportModels import ReportInterface, ReportForEmployee
+from employeModels import EmployeeInterface, EmployeeView
+from reportModels import ReportInterface, ReportView
 
 
 class ProgramWindow(QMainWindow):
@@ -35,12 +35,12 @@ class ProgramWindow(QMainWindow):
 
 
     def addEmployeePressed(self):
-        self.employes.append(Employee(room=randint(0,1000), percent=randint(0,100)))
+        self.employes.append(EmployeeView(room=randint(0,1000), percent=randint(0,100)))
         self.ui.employesTable.setModel(EmployeeInterface(self.employes))
 
 
     def addReportPressed(self):
-        self.reports.append(ReportForEmployee(totalSum=randint(0,100000),
+        self.reports.append(ReportView(totalSum=randint(0,100000),
                                               percent=randint(0,100)))
         self.ui.repotsTable.setModel(ReportInterface(self.reports))
 
