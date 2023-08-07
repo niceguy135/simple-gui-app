@@ -15,30 +15,62 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCheckBox, QHBoxLayout,
-    QLabel, QLayout, QLineEdit, QPushButton,
-    QSizePolicy, QSpinBox, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QButtonGroup, QCheckBox,
+    QGridLayout, QHBoxLayout, QLabel, QLayout,
+    QLineEdit, QPushButton, QRadioButton, QSizePolicy,
+    QSpinBox, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(490, 360)
+        Form.resize(490, 500)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
         Form.setSizePolicy(sizePolicy)
-        Form.setMinimumSize(QSize(490, 360))
-        Form.setMaximumSize(QSize(490, 360))
+        Form.setMinimumSize(QSize(490, 450))
+        Form.setMaximumSize(QSize(490, 500))
         self.verticalLayoutWidget = QWidget(Form)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(9, 9, 471, 346))
+        self.verticalLayoutWidget.setGeometry(QRect(9, 9, 471, 477))
         self.MainLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.MainLayout.setSpacing(15)
         self.MainLayout.setObjectName(u"MainLayout")
         self.MainLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.MainLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.isDoctor = QRadioButton(self.verticalLayoutWidget)
+        self.employeeTypeBox = QButtonGroup(Form)
+        self.employeeTypeBox.setObjectName(u"employeeTypeBox")
+        self.employeeTypeBox.addButton(self.isDoctor)
+        self.isDoctor.setObjectName(u"isDoctor")
+
+        self.gridLayout.addWidget(self.isDoctor, 3, 0, 1, 1)
+
+        self.isStudent = QRadioButton(self.verticalLayoutWidget)
+        self.employeeTypeBox.addButton(self.isStudent)
+        self.isStudent.setObjectName(u"isStudent")
+
+        self.gridLayout.addWidget(self.isStudent, 1, 0, 1, 1)
+
+        self.isNurse = QRadioButton(self.verticalLayoutWidget)
+        self.employeeTypeBox.addButton(self.isNurse)
+        self.isNurse.setObjectName(u"isNurse")
+
+        self.gridLayout.addWidget(self.isNurse, 2, 0, 1, 1)
+
+        self.isStandart = QRadioButton(self.verticalLayoutWidget)
+        self.employeeTypeBox.addButton(self.isStandart)
+        self.isStandart.setObjectName(u"isStandart")
+
+        self.gridLayout.addWidget(self.isStandart, 0, 0, 1, 1)
+
+
+        self.MainLayout.addLayout(self.gridLayout)
+
         self.fullNameLayout = QHBoxLayout()
         self.fullNameLayout.setObjectName(u"fullNameLayout")
         self.fullNameLable = QLabel(self.verticalLayoutWidget)
@@ -124,6 +156,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a\u0430", None))
+        self.isDoctor.setText(QCoreApplication.translate("Form", u"\u0412\u0440\u0430\u0447", None))
+        self.isStudent.setText(QCoreApplication.translate("Form", u"\u0421\u0442\u0443\u0434\u0435\u043d\u0442", None))
+        self.isNurse.setText(QCoreApplication.translate("Form", u"\u041c\u0435\u0434\u0441\u0435\u0441\u0442\u0440\u0430", None))
+        self.isStandart.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u044b\u0447\u043d\u044b\u0439 \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a", None))
         self.fullNameLable.setText(QCoreApplication.translate("Form", u"\u0424\u0418\u041e \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a\u0430", None))
         self.fullNameEdit.setText("")
         self.roomLable.setText(QCoreApplication.translate("Form", u"\u041a\u0430\u0431\u0438\u043d\u0435\u0442 \u0441\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a\u0430", None))
