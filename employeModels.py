@@ -1,4 +1,5 @@
 from PySide6.QtCore import QAbstractTableModel, Qt
+from logicModels import EmployeeType
 
 class EmployeeInterface(QAbstractTableModel):
     def __init__(self, data):
@@ -18,17 +19,30 @@ class EmployeeInterface(QAbstractTableModel):
         if (role == Qt.DisplayRole):
             match(index.column()):
                 case 0:
-                    return self._data[index.row()].name
+                    return self._data[index.row()].fullName
                 case 1:
-                    return self._data[index.row()].room
+                    match(self._data[index.row()].empType):
+                        case EmployeeType.STD:
+                            return "Обычный"
+                        case EmployeeType.STUDENT:
+                            return "Студент"
+                        case EmployeeType.NURSE:
+                            return "Медсестра"
+                        case EmployeeType.DOC:
+                            return "Доктор"
                 case 2:
-                    return self._data[index.row()].percent
+                    return self._data[index.row()].room if \
+                        self._data[index.row()].room != '' else "Не применимо"
                 case 3:
-                    return self._data[index.row()].staticPay
-                case 4:
-                    return self._data[index.row()].days
-                case 5:
                     return self._data[index.row()].bonus
+                case 4:
+                    if hasattr(self._data[index.row()], "workingDays"):
+                        return self._data[index.row()].workingDays
+                    else:
+                        return "Безразницы"
+                case 5:
+                    return self._data[index.row()].fixPay if \
+                        self._data[index.row()].fixPay > 0 else "Не фиксировано"
                 case 6:
                     return self._data[index.row()].total
 
@@ -43,30 +57,17 @@ class EmployeeInterface(QAbstractTableModel):
                 case 0:
                     return "ФИО"
                 case 1:
-                    return "Кабинет"
+                    return "Разряд"
                 case 2:
-                    return "Процент"
+                    return "Кабинет"
                 case 3:
-                    return "Фикс. зарплата"
+                    return "Бонус"
                 case 4:
                     return "Колич. дней"
                 case 5:
-                    return "Надбавка"
+                    return "Фикс. ЗП"
                 case 6:
                     return "Итог"
 
         return None
 
-
-class EmployeeView():
-    __dictionary = dict(name="Unknow",
-                 room=0,
-                 percent=0,
-                 staticPay=0,
-                 days=0,
-                 bonus=0)
-
-    def __init__(self, **kargs):
-        self.__dict__.update(self.__dictionary)
-        self.__dict__.update(kargs)
-        self.total = 0

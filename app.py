@@ -6,33 +6,13 @@ from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QWidget
 
 #макеты окон
 from first_maket_ui import Ui_Form
-import addEmployee_maket_ui as addEmplWindow
+
+#виджеты
+from addEmplWidget import AddEmployeeWidget
 
 #интерфейсы для вьюшек и сами вьюшки
-from employeModels import EmployeeInterface, EmployeeView
-from reportModels import ReportInterface, ReportView
-
-#основные классы сотрудников и отчетов
-from logicModels import Employee, Specialist, Report
-
-
-class AddEmployeeWidget(QWidget):
-    def __init__(self, parent=None):
-        super().__init__()
-        self.mainWidget = parent
-
-        self.ui = addEmplWindow.Ui_Form()
-        self.ui.setupUi(self)
-
-        self.ui.employeeTypeBox.setId(self.ui.isStandart, 1)
-        self.ui.employeeTypeBox.setId(self.ui.isStudent, 2)
-        self.ui.employeeTypeBox.setId(self.ui.isNurse, 3)
-        self.ui.employeeTypeBox.setId(self.ui.isDoctor, 4)
-
-    def createEmployeeTouched(self):
-        if self.mainWidget is not None:
-            print(self.ui.employeeTypeBox.checkedId())
-        
+from employeModels import EmployeeInterface
+from reportModels import ReportInterface, ReportView 
 
 
 class ProgramWindow(QMainWindow):
@@ -43,6 +23,10 @@ class ProgramWindow(QMainWindow):
 
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+
+        self.empInterface = None
+        self.repInterface = None
+
 
         self.employes = list()
         self.ui.employesTable.setModel(EmployeeInterface(self.employes))
@@ -69,8 +53,6 @@ class ProgramWindow(QMainWindow):
         else:
             self.addEmployeeWindow.close()
             self.addEmployeeWindow = None
-
-        #self.ui.employesTable.setModel(EmployeeInterface(self.employes))
 
 
     def addReportPressed(self):
