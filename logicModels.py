@@ -1,9 +1,21 @@
+from enum import Enum
+
+
+class EmployeeType(Enum):
+    STD = 1
+    STUDENT = 2
+    NURSE = 3
+    DOC = 4
+
+
 class Employee():
     _curUUID = 1    
 
-    def __init__(self, name, bonus, fixPay):
-        self.uuid = self.curUUID
+    def __init__(self, empType, name="Безымянный", room="Без кабинета", bonus=0, fixPay=0):
+        self.uuid = self._curUUID
+        self.empType = empType
         self.fullName = name
+        self.room = room
         self.bonus = bonus
         self.fixPay = fixPay
         self.total = 0
@@ -16,8 +28,8 @@ class Employee():
 
 
 class Specialist(Employee):
-    def __init__(self, name, bonus, fixPay, taxValue, workingDays):
-        super().__init__(name, bonus, fixPay)
+    def __init__(self, empType, name="Безымянный", room="Без кабинета", bonus=0, fixPay=0, taxValue=0, workingDays=0):
+        super().__init__(empType, name, room, bonus, fixPay)
 
         self.taxValue = taxValue
         self.workingDays = workingDays
