@@ -5,14 +5,14 @@ from random import randint
 from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QWidget
 
 #макеты окон
-from first_maket_ui import Ui_Form
+from uiFiles.first_maket_ui import Ui_Form
 
 #виджеты
-from addEmplWidget import AddEmployeeWidget
+from widgets.addEmplWidget import AddEmployeeWidget
 
 #интерфейсы для вьюшек и сами вьюшки
-from employeModels import EmployeeInterface
-from reportModels import ReportInterface, ReportView 
+from viewInterfaces.employeModels import EmployeeInterface
+from viewInterfaces.reportModels import ReportInterface, ReportView 
 
 
 class ProgramWindow(QMainWindow):

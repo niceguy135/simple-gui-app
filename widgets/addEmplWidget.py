@@ -1,8 +1,8 @@
-import addEmployee_maket_ui as addEmplWindow
+import uiFiles.addEmployee_maket_ui as addEmplWindow
 
 from PySide6.QtWidgets import QWidget
 from logicModels import Employee, Specialist, EmployeeType
-from employeModels import EmployeeInterface
+from viewInterfaces.employeModels import EmployeeInterface
 
 
 class ClassFactory():
