@@ -20,12 +20,10 @@ class ProgramWindow(QMainWindow):
         super().__init__()
 
         self.addEmployeeWindow = None
+        self.addReportWindow = None
 
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-
-        self.empInterface = None
-        self.repInterface = None
 
 
         self.employes = list()
@@ -56,9 +54,12 @@ class ProgramWindow(QMainWindow):
 
 
     def addReportPressed(self):
-        self.reports.append(ReportView(totalSum=randint(0,100000),
-                                              percent=randint(0,100)))
-        self.ui.repotsTable.setModel(ReportInterface(self.reports))
+        if self.addReportWindow is None:
+            self.addReportWindow = AddEmployeeWidget(parent=self)
+            self.addReportWindow.show()
+        else:
+            self.addReportWindow.close()
+            self.addReportWindow = None
 
 
     def calcPressed(self):
