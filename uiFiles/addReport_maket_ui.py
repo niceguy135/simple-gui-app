@@ -52,12 +52,12 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.totalEarnLabel)
 
-        self.spinBox = QSpinBox(self.verticalLayoutWidget)
-        self.spinBox.setObjectName(u"spinBox")
-        self.spinBox.setMaximum(10000000)
-        self.spinBox.setSingleStep(1000)
+        self.totalEarnSpin = QSpinBox(self.verticalLayoutWidget)
+        self.totalEarnSpin.setObjectName(u"totalEarnSpin")
+        self.totalEarnSpin.setMaximum(10000000)
+        self.totalEarnSpin.setSingleStep(1000)
 
-        self.verticalLayout.addWidget(self.spinBox)
+        self.verticalLayout.addWidget(self.totalEarnSpin)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
