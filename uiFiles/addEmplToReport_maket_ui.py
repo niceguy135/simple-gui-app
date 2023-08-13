@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QListView, QPushButton,
-    QSizePolicy, QSpinBox, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHeaderView, QLabel,
+    QPushButton, QSizePolicy, QSpinBox, QTableView,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -25,9 +26,6 @@ class Ui_Form(object):
         Form.resize(590, 286)
         Form.setMinimumSize(QSize(590, 286))
         Form.setMaximumSize(QSize(590, 286))
-        self.listView = QListView(Form)
-        self.listView.setObjectName(u"listView")
-        self.listView.setGeometry(QRect(10, 10, 281, 261))
         self.label = QLabel(Form)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(320, 70, 261, 16))
@@ -38,6 +36,11 @@ class Ui_Form(object):
         self.pushButton = QPushButton(Form)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(320, 160, 251, 101))
+        self.employeeTable = QTableView(Form)
+        self.employeeTable.setObjectName(u"employeeTable")
+        self.employeeTable.setGeometry(QRect(10, 10, 291, 251))
+        self.employeeTable.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.employeeTable.setSelectionBehavior(QAbstractItemView.SelectRows)
 
         self.retranslateUi(Form)
         self.pushButton.clicked.connect(Form.addEmployee)
