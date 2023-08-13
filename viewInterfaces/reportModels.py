@@ -44,14 +44,3 @@ class ReportInterface(QAbstractTableModel):
                     return "Итог без перерассчета"
 
         return None
-
-
-class ReportView():
-    __dictionary = dict(name="Unknow report",
-                 totalSumReport=0,
-                 percent=0)
-
-    def __init__(self, **kargs):
-        self.__dict__.update(self.__dictionary)
-        self.__dict__.update(kargs)
-        self.result = 0
