@@ -9,10 +9,11 @@ from uiFiles.first_maket_ui import Ui_Form
 
 #виджеты
 from widgets.addEmplWidget import AddEmployeeWidget
+from widgets.addReportWidget import AddReportWidget
 
 #интерфейсы для вьюшек и сами вьюшки
 from viewInterfaces.employeModels import EmployeeInterface
-from viewInterfaces.reportModels import ReportInterface, ReportView 
+from viewInterfaces.reportModels import ReportInterface
 
 
 class ProgramWindow(QMainWindow):
@@ -55,7 +56,7 @@ class ProgramWindow(QMainWindow):
 
     def addReportPressed(self):
         if self.addReportWindow is None:
-            self.addReportWindow = AddEmployeeWidget(parent=self)
+            self.addReportWindow = AddReportWidget(parent=self)
             self.addReportWindow.show()
         else:
             self.addReportWindow.close()
