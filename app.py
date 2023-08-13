@@ -44,6 +44,8 @@ class ProgramWindow(QMainWindow):
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
 
+        self.selectedReports = None
+
 
     def addEmployeePressed(self):
         if self.addEmployeeWindow is None:
@@ -69,6 +71,21 @@ class ProgramWindow(QMainWindow):
 
     def savePressed(self):
         print("Save")
+
+
+    def rowSelected(self):
+        if self.ui.employesTable.selectionModel().hasSelection():
+            del self.selectedReports
+            self.selectedReports = list()
+
+            for selectedRow in self.ui.employesTable.selectionModel().selectedRows():
+                selectedEmpl = self.employes[selectedRow.row()]
+                for curReport in self.reports:
+                    for curEmpl, curPerc in curReport.employeeList:
+                        if curEmpl.uuid == selectedEmpl.uuid:
+                            self.selectedReports.append((curReport, curPerc))
+            
+            self.ui.repotsTable.setModel(ReportInterface(self.selectedReports))
 
 
 if __name__ == "__main__":

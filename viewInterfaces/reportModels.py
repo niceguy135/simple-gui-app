@@ -18,13 +18,14 @@ class ReportInterface(QAbstractTableModel):
         if (role == Qt.DisplayRole):
             match(index.column()):
                 case 0:
-                    return self._data[index.row()].name
+                    return self._data[index.row()][0].reportName
                 case 1:
-                    return self._data[index.row()].totalSumReport
+                    return self._data[index.row()][0].totalEarn
                 case 2:
-                    return self._data[index.row()].percent
+                    return self._data[index.row()][1]
                 case 3:
-                    return self._data[index.row()].result
+                    return float(self._data[index.row()][0].totalEarn) * \
+                        (float(self._data[index.row()][1])/100)
 
         return None
     

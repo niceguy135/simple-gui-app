@@ -63,6 +63,7 @@ class Ui_Form(object):
         self.employesTable = QTableView(Form)
         self.employesTable.setObjectName(u"employesTable")
         self.employesTable.setGeometry(QRect(0, 120, 1001, 321))
+        self.employesTable.setSelectionMode(QAbstractItemView.SingleSelection)
         self.employesTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.employesTable.setSortingEnabled(True)
         self.repotsTable = QTableView(Form)
@@ -80,6 +81,7 @@ class Ui_Form(object):
         self.addRecordButton.pressed.connect(Form.addReportPressed)
         self.calculateButton.pressed.connect(Form.calcPressed)
         self.saveButton.pressed.connect(Form.savePressed)
+        self.employesTable.clicked.connect(Form.rowSelected)
 
         QMetaObject.connectSlotsByName(Form)
     # setupUi

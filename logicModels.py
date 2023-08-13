@@ -57,3 +57,7 @@ class Report():
 
     def calcClearPayment(self):
         pass
+    
+
+    def __str__(self) -> str:
+        return f"UUID: {self.uuid}; Name: {self.reportName}"
