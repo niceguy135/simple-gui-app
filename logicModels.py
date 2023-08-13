@@ -44,13 +44,13 @@ class Report():
     _curUUID = 1
 
 
-    def __init__(self, reportName, totalEarn, percPay, percConsum):
+    def __init__(self, reportName, totalEarn, percPay, percConsum, employeeList=list()):
         self.uuid = Report._curUUID
         self.reportName = reportName
         self.totalEarn = totalEarn
         self.percPay = percPay
         self.percConsum = percConsum
-        self.employeeList = list()
+        self.employeeList = employeeList.copy()
 
         Report._curUUID += 1
 

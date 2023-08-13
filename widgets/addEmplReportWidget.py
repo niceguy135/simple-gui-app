@@ -2,6 +2,7 @@ import uiFiles.addEmplToReport_maket_ui as addEmplToReport_maket
 
 from PySide6.QtWidgets import QWidget, QHeaderView
 from viewInterfaces.addEmplReportModel import AddEmplReportInterface
+from viewInterfaces.addReportModel import AddReportInterface
 
 
 class AddEmployeeToReportWidget(QWidget):
@@ -20,4 +21,10 @@ class AddEmployeeToReportWidget(QWidget):
 
     def addEmployee(self):
         if self.ui.employeeTable.selectionModel().hasSelection():
-            print(self.ui.employeeTable.selectionModel().selectedRows())
+            for selectedRow in self.ui.employeeTable.selectionModel().selectedRows():
+                self.reportWidget.selectedEmpls.append((
+                    self.mainWidget.employes[selectedRow.row()],
+                    self.ui.spinBox.value()
+                ))
+            self.reportWidget.ui.tableView.setModel(AddReportInterface(self.reportWidget.selectedEmpls))
+            self.reportWidget.addEmplWid = None

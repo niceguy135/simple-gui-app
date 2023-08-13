@@ -1,10 +1,12 @@
 import uiFiles.addReport_maket_ui as addReportWindow
 
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QWidget, QHeaderView
 from logicModels import Report
-from viewInterfaces.employeModels import EmployeeInterface
+
+from viewInterfaces.addReportModel import AddReportInterface
 
 from .addEmplReportWidget import AddEmployeeToReportWidget
+
 
 
 class AddReportWidget(QWidget):
@@ -12,11 +14,15 @@ class AddReportWidget(QWidget):
         super().__init__()
         self.mainWidget = parent
         self.addEmplWid = None
-        
-        self.selectedEmpls = list()
 
         self.ui = addReportWindow.Ui_Form()
         self.ui.setupUi(self)
+
+        self.selectedEmpls = list()
+        self.ui.tableView.setModel(AddReportInterface(self.selectedEmpls))
+        self.ui.tableView.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.ui.tableView.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.ui.tableView.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
 
     
     def addEmployee(self):
@@ -29,7 +35,10 @@ class AddReportWidget(QWidget):
 
     
     def deleteEmployee(self):
-        pass
+        if self.ui.tableView.selectionModel().hasSelection():
+            for selectedRow in self.ui.tableView.selectionModel().selectedRows():
+                del self.selectedEmpls[selectedRow.row()]
+        self.ui.tableView.setModel(AddReportInterface(self.selectedEmpls))
 
 
     def createReport(self):
@@ -38,6 +47,7 @@ class AddReportWidget(QWidget):
                 reportName = self.ui.reportEdit.text(),
                 totalEarn = self.ui.totalEarnSpin.value(),
                 percPay = self.ui.percPaySpin.value(),
-                percConsum = self.ui.percConsumSpin.value()
+                percConsum = self.ui.percConsumSpin.value(),
+                employeeList=self.selectedEmpls
             ))
-            self.mainWidget.ui.employesTable.setModel(EmployeeInterface(self.mainWidget.reports))
+            self.mainWidget.addReportWindow = None
