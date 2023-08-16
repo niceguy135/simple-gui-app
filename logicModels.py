@@ -80,6 +80,3 @@ class Report():
     def calcClearPayment(self, emplPercent):
         return ((self.totalEarn * (self.percConsum / 100)) * (self.percPay / 100)) * (emplPercent / 100)
     
-
-    def __str__(self) -> str:
-        return f"UUID: {self.uuid}; Name: {self.reportName}"
