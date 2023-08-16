@@ -67,3 +67,5 @@ class AddEmployeeWidget(QWidget):
         if self.mainWidget is not None:
             self.mainWidget.employes.append(self.factory.createEmployee())
             self.mainWidget.ui.employesTable.setModel(EmployeeInterface(self.mainWidget.employes))
+            self.mainWidget.addEmployeeWindow = None
+            self.close()

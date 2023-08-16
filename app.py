@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import sys
 from random import randint
 
@@ -66,8 +65,17 @@ class ProgramWindow(QMainWindow):
 
 
     def calcPressed(self):
-        print("Calculate")
+        for employee in self.employes:
+            employee.total = 0
 
+        for report in self.reports:
+            for employee, percent in report.employeeList:
+                employee.total += report.calcClearPayment(percent)
+
+        for employee in self.employes:
+            employee.calculatePayment()
+
+        self.ui.employesTable.setModel(EmployeeInterface(self.employes))
 
     def savePressed(self):
         print("Save")
