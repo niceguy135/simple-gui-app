@@ -24,8 +24,9 @@ class ReportInterface(QAbstractTableModel):
                 case 2:
                     return self._data[index.row()][1]
                 case 3:
-                    return float(self._data[index.row()][0].totalEarn) * \
-                        (float(self._data[index.row()][1])/100)
+                    return self._data[index.row()][0].calcClearPayment(
+                        self._data[index.row()][1]
+                    )
 
         return None
     
