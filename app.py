@@ -1,5 +1,7 @@
 import sys
-from random import randint
+import xlsxwriter
+
+from datetime import datetime
 
 from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QWidget
 
@@ -77,8 +79,25 @@ class ProgramWindow(QMainWindow):
 
         self.ui.employesTable.setModel(EmployeeInterface(self.employes))
 
+
     def savePressed(self):
-        print("Save")
+        self.calcPressed()
+
+        curTime = datetime.now()
+
+        workbook = xlsxwriter.Workbook(f'{curTime.hour}:{curTime.minute}:{curTime.second}.xlsx')
+ 
+        worksheet = workbook.add_worksheet("Зарплаты сотрудникам")
+        
+        row = 0
+        col = 0
+        
+        for employee in self.employes:
+            worksheet.write(row, col, employee.fullName)
+            worksheet.write(row, col + 1, employee.total)
+            row += 1
+        
+        workbook.close()
 
 
     def rowSelected(self):
