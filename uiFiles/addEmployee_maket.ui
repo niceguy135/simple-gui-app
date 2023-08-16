@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>490</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>490</width>
+    <height>450</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>490</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Добавить сотрудника</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>471</width>
+     <height>477</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="MainLayout">
+    <property name="spacing">
+     <number>15</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="3" column="0">
+       <widget class="QRadioButton" name="isDoctor">
+        <property name="text">
+         <string>Врач</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">employeeTypeBox</string>
+        </attribute>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="isStudent">
+        <property name="text">
+         <string>Студент</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">employeeTypeBox</string>
+        </attribute>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="isNurse">
+        <property name="text">
+         <string>Медсестра</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">employeeTypeBox</string>
+        </attribute>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="isStandart">
+        <property name="text">
+         <string>Обычный сотрудник</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">employeeTypeBox</string>
+        </attribute>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="fullNameLayout">
+      <item>
+       <widget class="QLabel" name="fullNameLable">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>ФИО сотрудника</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="fullNameEdit">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="roomLayout">
+      <item>
+       <widget class="QLabel" name="roomLable">
+        <property name="text">
+         <string>Кабинет сотрудника</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="roomEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="isFixPay">
+      <property name="text">
+       <string>Установлена ли фиксированная зарплата?</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="fixPayPin">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="buttonSymbols">
+       <enum>QAbstractSpinBox::PlusMinus</enum>
+      </property>
+      <property name="specialValueText">
+       <string/>
+      </property>
+      <property name="correctionMode">
+       <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
+      </property>
+      <property name="showGroupSeparator" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string> рублей</string>
+      </property>
+      <property name="maximum">
+       <number>1000000</number>
+      </property>
+      <property name="singleStep">
+       <number>1000</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="isRecalcNeed">
+      <property name="text">
+       <string>Будет ли проводиться перерасчет по количеству дней?</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="startValueBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="specialValueText">
+       <string/>
+      </property>
+      <property name="suffix">
+       <string> рублей</string>
+      </property>
+      <property name="maximum">
+       <number>100000</number>
+      </property>
+      <property name="singleStep">
+       <number>500</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="workedDaysBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="specialValueText">
+       <string/>
+      </property>
+      <property name="suffix">
+       <string> дней</string>
+      </property>
+      <property name="maximum">
+       <number>31</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="createEmployee">
+      <property name="text">
+       <string>Создать сотрудника</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>isFixPay</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>fixPayPin</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>182</x>
+     <y>61</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>isRecalcNeed</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>startValueBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>310</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>303</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>isRecalcNeed</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>workedDaysBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>420</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>409</x>
+     <y>224</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>createEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>createEmployeeTouched()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>113</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>232</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>createEmployeeTouched()</slot>
+ </slots>
+ <buttongroups>
+  <buttongroup name="employeeTypeBox"/>
+ </buttongroups>
+</ui>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Программа расчета зарплат</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>-1</x>
+     <y>-1</y>
+     <width>1001</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>20</number>
+    </property>
+    <property name="leftMargin">
+     <number>20</number>
+    </property>
+    <property name="rightMargin">
+     <number>20</number>
+    </property>
+    <item>
+     <widget class="QPushButton" name="addEmployeeButton">
+      <property name="text">
+       <string>Добавить сотрудника</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="addRecordButton">
+      <property name="text">
+       <string>Добавить отчет</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="calculateButton">
+      <property name="text">
+       <string>Провести рассчет зарплат</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="saveButton">
+      <property name="text">
+       <string>Сохранить результат</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTableView" name="employesTable">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>120</y>
+     <width>1001</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QTableView" name="repotsTable">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>450</y>
+     <width>1000</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>100</number>
+   </attribute>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>addEmployeeButton</sender>
+   <signal>pressed()</signal>
+   <receiver>Form</receiver>
+   <slot>addEmployeePressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>-5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRecordButton</sender>
+   <signal>pressed()</signal>
+   <receiver>Form</receiver>
+   <slot>addReportPressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>329</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>-4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calculateButton</sender>
+   <signal>pressed()</signal>
+   <receiver>Form</receiver>
+   <slot>calcPressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>553</x>
+     <y>-3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveButton</sender>
+   <signal>pressed()</signal>
+   <receiver>Form</receiver>
+   <slot>savePressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>859</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>811</x>
+     <y>-6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>employesTable</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>Form</receiver>
+   <slot>rowSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>-6</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addEmployeePressed()</slot>
+  <slot>addReportPressed()</slot>
+  <slot>calcPressed()</slot>
+  <slot>savePressed()</slot>
+  <slot>rowSelected()</slot>
+ </slots>
+</ui>
