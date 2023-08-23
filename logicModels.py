@@ -5,6 +5,11 @@ import calendar
 import logging
 import sys
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler(stream=sys.stdout)
+logger.addHandler(handler)
+
 class EmployeeType(Enum):
     STD = 1
     STUDENT = 2
@@ -81,5 +86,5 @@ class Report():
 
 
     def calcClearPayment(self, emplPercent):
-        return ((self.totalEarn * (self.percConsum / 100)) * (self.percPay / 100)) * (emplPercent / 100)
+        return ((self.totalEarn * ( (100 - self.percConsum) / 100)) * (self.percPay / 100)) * (emplPercent / 100)
     
