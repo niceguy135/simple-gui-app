@@ -1,6 +1,9 @@
 from enum import Enum
 from datetime import datetime, timedelta
+
 import calendar
+import logging
+import sys
 
 class EmployeeType(Enum):
     STD = 1
@@ -54,9 +57,9 @@ class Specialist(Employee):
         firstMonthDay = datetime(Specialist._curYear, Specialist._curMonth, 1)
         lastMonthDay = datetime(Specialist._curYear, Specialist._curMonth, Specialist._lastMonthDay)
 
-        dates = (firstMonthDay + timedelta(idx + 1)
-                for idx in range((lastMonthDay - firstMonthDay).days))
-        
+        dates = (firstMonthDay + timedelta(idx)
+                for idx in range((lastMonthDay - firstMonthDay).days + 1))
+
         res = sum(1 for day in dates if day.weekday() < 5)
 
         self.total -= self.taxValue * (self.workingDays / res)
