@@ -16,7 +16,7 @@ class EmployeeInterface(QAbstractTableModel):
 
 
     def data(self, index, role):
-        if (role == Qt.DisplayRole):
+        if role == Qt.DisplayRole or role == Qt.EditRole :
             match(index.column()):
                 case 0:
                     return self._data[index.row()].fullName
@@ -70,4 +70,33 @@ class EmployeeInterface(QAbstractTableModel):
                     return "Итог"
 
         return None
+    
 
+    def flags(self, index):
+        if not index.isValid():
+            return Qt.ItemIsEnabled
+
+        return super().flags(index) | Qt.ItemIsEditable  # add editable flag.
+
+
+    def setData(self, index, value, role):
+        if role == Qt.EditRole:
+            
+            # self._data.iloc[index.row(), index.column()] = value
+            match(index.column()):
+                case 0:
+                    self._data[index.row()].fullName = str(value)
+                case 2:
+                    self._data[index.row()].room = str(value)
+                case 3:
+                    self._data[index.row()].bonus = int(value)
+                case 4:
+                    self._data[index.row()].bonus = int(value)
+                case 5:
+                    if hasattr(self._data[index.row()], "workingDays"):
+                        self._data[index.row()].workingDays = int(value)
+                        
+            self.dataChanged.emit(index, index, (Qt.DisplayRole, ))
+            return True
+
+        return False
