@@ -76,13 +76,12 @@ class EmployeeInterface(QAbstractTableModel):
         if not index.isValid():
             return Qt.ItemIsEnabled
 
-        return super().flags(index) | Qt.ItemIsEditable  # add editable flag.
+        return super().flags(index) | Qt.ItemIsEditable
 
 
     def setData(self, index, value, role):
         if role == Qt.EditRole:
             
-            # self._data.iloc[index.row(), index.column()] = value
             match(index.column()):
                 case 0:
                     self._data[index.row()].fullName = str(value)
@@ -91,11 +90,11 @@ class EmployeeInterface(QAbstractTableModel):
                 case 3:
                     self._data[index.row()].bonus = int(value)
                 case 4:
-                    self._data[index.row()].bonus = int(value)
-                case 5:
                     if hasattr(self._data[index.row()], "workingDays"):
                         self._data[index.row()].workingDays = int(value)
-                        
+                case 5:
+                    self._data[index.row()].fixPay = int(value)
+
             self.dataChanged.emit(index, index, (Qt.DisplayRole, ))
             return True
 
