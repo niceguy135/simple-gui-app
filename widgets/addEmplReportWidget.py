@@ -22,9 +22,9 @@ class AddEmployeeToReportWidget(QWidget):
     def addEmployee(self):
         if self.ui.employeeTable.selectionModel().hasSelection():
             for selectedRow in self.ui.employeeTable.selectionModel().selectedRows():
-                self.reportWidget.selectedEmpls.append((
+                self.reportWidget.selectedEmpls.append([
                     self.mainWidget.employes[selectedRow.row()],
                     self.ui.spinBox.value()
-                ))
+                ])
             self.reportWidget.ui.tableView.setModel(AddReportInterface(self.reportWidget.selectedEmpls))
             self.reportWidget.addEmplWid = None

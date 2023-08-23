@@ -22,10 +22,10 @@ class ReportInterface(QAbstractTableModel):
                 case 1:
                     return self._data[index.row()][0].totalEarn
                 case 2:
-                    return self._data[index.row()][1]
+                    return self._data[index.row()][1][1]
                 case 3:
                     return self._data[index.row()][0].calcClearPayment(
-                        self._data[index.row()][1]
+                        self._data[index.row()][1][1]
                     )
 
         return None
@@ -46,3 +46,27 @@ class ReportInterface(QAbstractTableModel):
                     return "Итог без перерассчета"
 
         return None
+    
+
+    def flags(self, index):
+        if not index.isValid():
+            return Qt.ItemIsEnabled
+        
+        return super().flags(index) | Qt.ItemIsEditable
+
+
+    def setData(self, index, value, role):
+        if role == Qt.EditRole:
+            
+            match(index.column()):
+                case 0:
+                    self._data[index.row()][0].reportName = str(value)
+                case 1:
+                    self._data[index.row()][0].totalEarn = int(value)
+                case 2:
+                    self._data[index.row()][1][1] = int(value)
+
+            self.dataChanged.emit(index, index, (Qt.DisplayRole, ))
+            return True
+
+        return False

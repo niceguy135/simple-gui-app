@@ -108,9 +108,9 @@ class ProgramWindow(QMainWindow):
             for selectedRow in self.ui.employesTable.selectionModel().selectedRows():
                 selectedEmpl = self.employes[selectedRow.row()]
                 for curReport in self.reports:
-                    for curEmpl, curPerc in curReport.employeeList:
-                        if curEmpl.uuid == selectedEmpl.uuid:
-                            self.selectedReports.append((curReport, curPerc))
+                    for curEmplPerc in curReport.employeeList:
+                        if curEmplPerc[0].uuid == selectedEmpl.uuid:
+                            self.selectedReports.append([curReport, curEmplPerc])
             
             self.ui.repotsTable.setModel(ReportInterface(self.selectedReports))
 
