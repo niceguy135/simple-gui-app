@@ -3,8 +3,8 @@ import xlsxwriter
 
 from datetime import datetime
 
-from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QWidget
-
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QMenu
 #макеты окон
 from uiFiles.first_maket_ui import Ui_Form
 
@@ -29,7 +29,11 @@ class ProgramWindow(QMainWindow):
 
 
         self.employes = list()
+        self.ui.employesTable.setContextMenuPolicy(Qt.CustomContextMenu)
         self.ui.employesTable.setModel(EmployeeInterface(self.employes))
+        self.ui.employesTable.customContextMenuRequested.connect(self.CustomContextMenuEmpl)
+        
+
         self.ui.employesTable.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         self.ui.employesTable.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         self.ui.employesTable.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
@@ -38,14 +42,26 @@ class ProgramWindow(QMainWindow):
         self.ui.employesTable.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeMode.Stretch)
         self.ui.employesTable.horizontalHeader().setSectionResizeMode(6, QHeaderView.ResizeMode.Stretch)
 
+
         self.reports = list()
+        self.ui.repotsTable.setContextMenuPolicy(Qt.CustomContextMenu)
         self.ui.repotsTable.setModel(ReportInterface(self.reports))
+        self.ui.repotsTable.customContextMenuRequested.connect(self.CustomContextMenuReport)
+        
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
 
         self.selectedReports = None
+
+        self.emplMenu = QMenu(self)
+        self.deleteEmplOpt = self.emplMenu.addAction("Удалить")
+        self.deleteEmplOpt.triggered.connect(self.DeleteSelectedEmpl)
+
+        self.reportMenu = QMenu(self)
+        self.deleteReportOpt = self.reportMenu.addAction("Удалить")
+        self.deleteReportOpt.triggered.connect(self.DeleteSelectedReport)
 
 
     def addEmployeePressed(self):
@@ -114,6 +130,40 @@ class ProgramWindow(QMainWindow):
             
             self.ui.repotsTable.setModel(ReportInterface(self.selectedReports))
 
+    
+    def CustomContextMenuEmpl(self, point):
+        self.emplMenu.exec(self.ui.employesTable.mapToGlobal(point))
+
+
+    def CustomContextMenuReport(self, point):
+        self.reportMenu.exec(self.ui.repotsTable.mapToGlobal(point))
+
+    
+    def DeleteSelectedEmpl(self):
+        if self.ui.employesTable.selectionModel().hasSelection():
+            for selectedRow in self.ui.employesTable.selectionModel().selectedRows():
+                removingEmpl = self.employes[selectedRow.row()]
+                self.employes.pop(selectedRow.row())
+
+                for curReport in self.reports:
+                    for ind, curEmplPerc in enumerate(curReport.employeeList):
+                        if curEmplPerc[0].uuid == removingEmpl.uuid:
+                            curReport.employeeList.pop(ind)
+        
+            self.ui.employesTable.setModel(EmployeeInterface(self.employes))
+
+
+    def DeleteSelectedReport(self):
+        if self.ui.repotsTable.selectionModel().hasSelection():
+            for selectedRow in self.ui.repotsTable.selectionModel().selectedRows():
+                deletedReport = self.selectedReports.pop(selectedRow.row())
+
+                for ind, report in enumerate(self.reports):
+                    if report.uuid == deletedReport[0].uuid:
+                        self.reports.pop(ind)
+        
+            self.ui.repotsTable.setModel(ReportInterface(self.selectedReports))
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
