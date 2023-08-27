@@ -1,5 +1,6 @@
 import sys
 import os
+import platform
 import xlsxwriter
 
 from datetime import datetime
@@ -106,8 +107,11 @@ class ProgramWindow(QMainWindow):
                                                "*.xlsx",
                                                "*.xlsx")
 
-        workbook = xlsxwriter.Workbook("".join([fileName, filterName[1:]]))
- 
+        if platform.system() == "Windows":
+            workbook = xlsxwriter.Workbook(fileName)
+        else:
+            workbook = xlsxwriter.Workbook("".join([fileName, filterName[1:]]))
+
         worksheet = workbook.add_worksheet("Зарплаты сотрудникам")
         
         row = 0
