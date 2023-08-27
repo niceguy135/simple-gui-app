@@ -1,10 +1,11 @@
 import sys
+import os
 import xlsxwriter
 
 from datetime import datetime
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QMenu
+from PySide6.QtWidgets import QMainWindow, QApplication, QHeaderView, QMenu, QFileDialog
 #макеты окон
 from uiFiles.first_maket_ui import Ui_Form
 
@@ -99,9 +100,13 @@ class ProgramWindow(QMainWindow):
     def savePressed(self):
         self.calcPressed()
 
-        curTime = datetime.now()
+        fileName, filterName = QFileDialog.getSaveFileName(self,
+                                               "Куда сохранить Excel файл?",
+                                               os.path.join(os.path.dirname(os.path.realpath(__file__)), "saved_Excels"),
+                                               "*.xlsx",
+                                               "*.xlsx")
 
-        workbook = xlsxwriter.Workbook(f'{curTime.hour}:{curTime.minute}:{curTime.second}.xlsx')
+        workbook = xlsxwriter.Workbook("".join([fileName, filterName[1:]]))
  
         worksheet = workbook.add_worksheet("Зарплаты сотрудникам")
         
