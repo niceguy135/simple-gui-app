@@ -53,7 +53,7 @@ class ProgramWindow(QMainWindow):
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.ui.repotsTable.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
 
-        self.selectedReports = None
+        self.selectedReports = list()
 
         self.emplMenu = QMenu(self)
         self.deleteEmplOpt = self.emplMenu.addAction("Удалить")
@@ -118,8 +118,7 @@ class ProgramWindow(QMainWindow):
 
     def rowSelected(self):
         if self.ui.employesTable.selectionModel().hasSelection():
-            del self.selectedReports
-            self.selectedReports = list()
+            self.selectedReports.clear()
 
             for selectedRow in self.ui.employesTable.selectionModel().selectedRows():
                 selectedEmpl = self.employes[selectedRow.row()]
@@ -141,9 +140,9 @@ class ProgramWindow(QMainWindow):
     
     def DeleteSelectedEmpl(self):
         if self.ui.employesTable.selectionModel().hasSelection():
+
             for selectedRow in self.ui.employesTable.selectionModel().selectedRows():
-                removingEmpl = self.employes[selectedRow.row()]
-                self.employes.pop(selectedRow.row())
+                removingEmpl = self.employes.pop(selectedRow.row())
 
                 for curReport in self.reports:
                     for ind, curEmplPerc in enumerate(curReport.employeeList):
@@ -155,13 +154,18 @@ class ProgramWindow(QMainWindow):
 
     def DeleteSelectedReport(self):
         if self.ui.repotsTable.selectionModel().hasSelection():
+            selcetedEmplRow = self.ui.employesTable.selectionModel().selectedRows()
+            selectedEmpl = self.employes[selcetedEmplRow[0].row()]
+
             for selectedRow in self.ui.repotsTable.selectionModel().selectedRows():
                 deletedReport = self.selectedReports.pop(selectedRow.row())
 
-                for ind, report in enumerate(self.reports):
+                for report in self.reports:
                     if report.uuid == deletedReport[0].uuid:
-                        self.reports.pop(ind)
-        
+                        for ind, employee in enumerate(report.employeeList):
+                            if employee[0].uuid == selectedEmpl.uuid:
+                                report.employeeList.pop(ind)
+
             self.ui.repotsTable.setModel(ReportInterface(self.selectedReports))
     
 
